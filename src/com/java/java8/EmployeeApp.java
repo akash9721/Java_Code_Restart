@@ -207,13 +207,13 @@ System.out.println("LEVEL 3 – ADVANCED (Nested Grouping, Partitioning, Complex
 				long totalEmp = emp.parallelStream().count();
 				System.out.println(totalEmp);
 
-				
-				
 
+		System.out.println("TOP 5 most frequently asked Stream questions in almost every interview");
+		System.out.println("\n Find highest paid employee in each department");
+		Map<String, Optional<Employee>> empl = emp.stream()
+				.collect(Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Comparator.comparingInt(Employee::getSalary))));
+		empl.forEach((dept,emps)-> System.out.println(dept+" = "+ emps.get().getName()+" -> "+emps.get().getSalary()));
 
-				
-
-				
 
 	}
 }
