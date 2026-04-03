@@ -200,7 +200,7 @@ System.out.println("LEVEL 3 – ADVANCED (Nested Grouping, Partitioning, Complex
 						.sorted(Comparator.comparing(Employee::getDepartment)
 								.thenComparing(Employee::getSalary))
 									.forEach((e->System.out.println(e.getDepartment()
-											+"->"+e.getName()+":"+e.getSalary())));
+										+"->"+e.getName()+":"+e.getSalary())));
 							
 
 				System.out.println("\n30. Count total number of employees using parallel stream");
