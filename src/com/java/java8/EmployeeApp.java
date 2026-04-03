@@ -1,10 +1,6 @@
 package com.java.java8;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.sound.midi.Soundbank;
@@ -209,10 +205,31 @@ System.out.println("LEVEL 3 – ADVANCED (Nested Grouping, Partitioning, Complex
 
 
 		System.out.println("TOP 5 most frequently asked Stream questions in almost every interview");
-		System.out.println("\n Find highest paid employee in each department");
+		System.out.println("\nQ1. Find highest paid employee in each department");
 		Map<String, Optional<Employee>> empl = emp.stream()
 				.collect(Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Comparator.comparingInt(Employee::getSalary))));
 		empl.forEach((dept,emps)-> System.out.println(dept+" = "+ emps.get().getName()+" -> "+emps.get().getSalary()));
+
+		System.out.println("\nQ2. Find second highest salary");
+		Employee employee = emp.stream()
+				.sorted(Comparator.comparingInt(Employee::getSalary).reversed()).skip(1).findFirst().orElseThrow(null);
+		System.out.println(employee.getName()+" -> "+employee.getSalary());
+
+		System.out.println("\nQ3. Group employees by department and count");
+		emp.stream()
+				.collect(Collectors.groupingBy(Employee::getDepartment,Collectors.counting()))
+				.forEach((k,v)-> System.out.println(k+ "-> "+v));
+
+		System.out.println("\nQ4. Average salary department wise");
+		emp.stream()
+				.collect(Collectors.groupingBy(Employee::getDepartment,Collectors.averagingInt(Employee::getSalary)))
+				.forEach((dept,avg)-> System.out.println(dept+ "-> "+avg));
+
+		System.out.println("\nQ5. Find duplicate names in list");
+		Set<String> set=new HashSet<>();
+		var empList= emp.stream()
+				.map(Employee::getName).filter(name->!set.add(name)).toList();
+		System.out.println(empList);
 
 
 	}
