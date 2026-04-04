@@ -79,8 +79,11 @@ System.out.println("\nLEVEL 2 – INTERMEDIATE (Sorting, Min/Max, Grouping)\n");
 															.findFirst()
 																.get();
 				System.out.println(highestPaidEmp.getName()+" : "+highestPaidEmp.getSalary());
-				
-				System.out.println("\n12. Second highest salary employee");
+		Employee highestPaidEmp1 = emp.stream()
+				.collect(Collectors.maxBy(Comparator.comparingInt(Employee::getSalary))).stream().findFirst().get();
+		System.out.println(highestPaidEmp1.getName()+" : "+highestPaidEmp1.getSalary());
+
+		System.out.println("\n12. Second highest salary employee");
 				Employee secondHighPaidEmp = emp.stream()
 						.sorted(Comparator.comparingInt(Employee::getSalary)
 								.reversed())
