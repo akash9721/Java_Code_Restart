@@ -1,6 +1,8 @@
 package com.java.designPattern.creationalDesignPattern.singletonDesignPattern;
 
-class Singleton{
+import java.io.Serializable;
+
+class Singleton implements Cloneable, Serializable {
 
     //lazy Initialization
     private static Singleton instance;
@@ -12,5 +14,9 @@ class Singleton{
             instance=new Singleton();
         }
         return instance;
+    }
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
