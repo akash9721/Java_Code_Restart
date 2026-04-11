@@ -1,4 +1,4 @@
-package com.java.designPattern.creationalDesignPattern.singletonDesignPattern.factoryDesignPattern;
+package com.java.designPattern.creationalDesignPattern.factoryDesignPattern;
 
 public class PizzaMain {
     public static void main(String[] args) {
