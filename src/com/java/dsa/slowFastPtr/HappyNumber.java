@@ -1,4 +1,4 @@
-package com.java.slowFastPtr;
+package com.java.dsa.slowFastPtr;
 
 import java.util.HashSet;
 import java.util.Set;

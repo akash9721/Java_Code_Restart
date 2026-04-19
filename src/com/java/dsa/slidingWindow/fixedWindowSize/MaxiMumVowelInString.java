@@ -1,4 +1,4 @@
-package com.java.dsa.slidingWindow;
+package com.java.dsa.slidingWindow.fixedWindowSize;
 
 public class MaxiMumVowelInString {
 

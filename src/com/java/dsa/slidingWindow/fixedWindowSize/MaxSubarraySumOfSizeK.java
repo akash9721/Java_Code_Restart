@@ -1,4 +1,4 @@
-package com.java.dsa.slidingWindow;
+package com.java.dsa.slidingWindow.fixedWindowSize;
 
 public class MaxSubarraySumOfSizeK {
     public static int usingBruteforce(int arr[],int k){

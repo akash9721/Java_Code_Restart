@@ -1,5 +1,5 @@
 
-package com.java.slowFastPtr;
+package com.java.dsa.slowFastPtr;
 
 class ListNode{
 	int data;
