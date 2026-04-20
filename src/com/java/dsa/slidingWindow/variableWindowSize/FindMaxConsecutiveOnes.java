@@ -1,4 +1,4 @@
-package com.java.dsa.slidingWindow;
+package com.java.dsa.slidingWindow.variableWindowSize;
 
 class FindMaxConsecutiveOnes {
 
