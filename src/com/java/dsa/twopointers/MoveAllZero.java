@@ -1,4 +1,4 @@
-package com.java.dsaArray;
+package com.java.dsa.twopointers;
 
 public class MoveAllZero {
 
