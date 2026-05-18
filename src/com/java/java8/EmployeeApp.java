@@ -56,7 +56,7 @@ System.out.println("LEVEL 1 – BASIC (Filtering, Mapping, Simple Aggregation)\n
 				System.out.println(anyMatch);
 
 				System.out.println("\n7. Check if all employees are older than 18");
-				boolean allMatch = emp.stream().allMatch(e->e.getAge()>18);
+				boolean allMatch = emp.stream().allMatch(e -> e.getAge() > 18);
 				System.out.println(allMatch);
 
 				System.out.println("\n8. Find total salary of all employees");
@@ -82,6 +82,10 @@ System.out.println("\nLEVEL 2 – INTERMEDIATE (Sorting, Min/Max, Grouping)\n");
 		Employee highestPaidEmp1 = emp.stream()
 				.collect(Collectors.maxBy(Comparator.comparingInt(Employee::getSalary))).stream().findFirst().get();
 		System.out.println(highestPaidEmp1.getName()+" : "+highestPaidEmp1.getSalary());
+
+		Employee highestPaidEmp2 = emp.stream()
+				.max(Comparator.comparingInt(Employee::getSalary)).get();
+		System.out.println(highestPaidEmp2.getName()+" : "+highestPaidEmp2.getSalary());
 
 		System.out.println("\n12. Second highest salary employee");
 				Employee secondHighPaidEmp = emp.stream()
@@ -117,6 +121,12 @@ System.out.println("\nLEVEL 2 – INTERMEDIATE (Sorting, Min/Max, Grouping)\n");
 							.findFirst()
 								.get();
 				System.out.println(oldEmployee.getName());
+
+				Employee oldest =
+						emp.stream()
+								.max(Comparator.comparingInt(Employee::getAge))
+									.get();
+				System.out.println(oldest.getName() + " : " + oldest.getAge());
 				
 				System.out.println("\n16. Count of employees in each department");
 				emp.stream()
@@ -141,6 +151,12 @@ System.out.println("\nLEVEL 2 – INTERMEDIATE (Sorting, Min/Max, Grouping)\n");
 		        System.out.println(year + " -> " +
 		                list.stream().map(Employee::getName).toList()));
 
+		System.out.println();
+		Map<Integer, List<String>> empGrpByYrsOfJoining = emp.stream()
+				.collect(Collectors.groupingBy(Employee::getYearOfjoining,
+						Collectors.mapping(Employee::getName, Collectors.toList())));
+		empGrpByYrsOfJoining.forEach((year,emps)-> System.out.println(year+" ->: "+emps));
+
 				System.out.println("\n20. Sort employees by salary in descending order");
 				emp.stream()
 						.sorted(Comparator.comparingInt(Employee::getSalary).reversed())
@@ -157,7 +173,7 @@ System.out.println("LEVEL 3 – ADVANCED (Nested Grouping, Partitioning, Complex
 				System.out.println("\n22. Lowest salary in each department");
 				Map<String, Optional<Employee>> lowSalEachDept = emp.stream()
 						.collect(Collectors.groupingBy(Employee::getDepartment,Collectors.minBy(Comparator.comparingInt(Employee::getSalary))));
-				lowSalEachDept.forEach((k,v)->System.out.println(k+"-> "+v.get().getName()+":"+v.get().getSalary()));
+				lowSalEachDept.forEach((k,v)->System.out.println(k+"-> "+v.get().getName()+" : "+v.get().getSalary()));
 
 				System.out.println("\n23. Department-wise gender count");
 				Map<String, Map<String, Long>> departMentWiseGenderCount = emp.stream()
@@ -187,20 +203,17 @@ System.out.println("LEVEL 3 – ADVANCED (Nested Grouping, Partitioning, Complex
 				System.out.println("less than 30 employees:"+lessThan30);
 
 				System.out.println("\n28. Employee names grouped by department");
-				emp.stream()
-						.collect(Collectors.groupingBy(Employee::getDepartment))
-							.forEach((dept,list)->{
-								System.out.println(dept);
-								list.stream().map(Employee::getName).collect(Collectors.toList());
-							});
+				Map<String, List<Employee>> empNameGrpByDept = emp.stream()
+						.collect(Collectors.groupingBy(Employee::getDepartment));
+				empNameGrpByDept.forEach((dept,namesLists)->
+						System.out.println(dept+" ->: "+namesLists.stream().map(Employee::getName).toList()));
 
-				System.out.println("\n29. Sort employees by department then by salary");
+		System.out.println("\n29. Sort employees by department then by salary");
 				emp.stream()
 						.sorted(Comparator.comparing(Employee::getDepartment)
 								.thenComparing(Employee::getSalary))
 									.forEach((e->System.out.println(e.getDepartment()
 										+"->"+e.getName()+":"+e.getSalary())));
-							
 
 				System.out.println("\n30. Count total number of employees using parallel stream");
 				long totalEmp = emp.parallelStream().count();
