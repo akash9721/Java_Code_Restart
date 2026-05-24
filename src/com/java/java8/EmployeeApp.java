@@ -246,7 +246,5 @@ System.out.println("LEVEL 3 – ADVANCED (Nested Grouping, Partitioning, Complex
 		var empList= emp.stream()
 				.map(Employee::getName).filter(name->!set.add(name)).toList();
 		System.out.println(empList);
-
-
 	}
 }
